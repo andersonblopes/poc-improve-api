@@ -1,5 +1,6 @@
 package com.lopessystem.pocimproveapi.exceptions.handler;
 
+import com.lopessystem.pocimproveapi.exceptions.EntityBeingUsedException;
 import com.lopessystem.pocimproveapi.exceptions.EntityNotFoundException;
 import com.lopessystem.pocimproveapi.exceptions.ExceptionMessage;
 import com.lopessystem.pocimproveapi.exceptions.ExceptionType;
@@ -29,8 +30,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, exceptionMessage, new HttpHeaders(), status, webRequest);
     }
 
-    public ExceptionMessage createExceptionMessageBuilder(HttpStatus status, ExceptionType exceptionType, String detail,
-                                                          WebRequest webRequest) {
+    @ExceptionHandler(EntityBeingUsedException.class)
+    public ResponseEntity<Object> handleEntityBeingUsedException(EntityBeingUsedException ex, WebRequest webRequest) {
+
+        HttpStatus status = HttpStatus.CONFLICT;
+        ExceptionType exceptionType = ExceptionType.ENTITY_BEING_USED;
+        String detail = ex.getMessage();
+
+        ExceptionMessage exceptionMessage = createExceptionMessageBuilder(status, exceptionType, detail, webRequest);
+
+        return handleExceptionInternal(ex, exceptionMessage, new HttpHeaders(), status, webRequest);
+    }
+
+    private ExceptionMessage createExceptionMessageBuilder(HttpStatus status, ExceptionType exceptionType, String detail,
+                                                           WebRequest webRequest) {
 
         HttpServletRequest request = ((ServletWebRequest) webRequest).getRequest();
 
