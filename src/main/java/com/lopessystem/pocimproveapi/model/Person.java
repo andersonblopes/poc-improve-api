@@ -1,5 +1,6 @@
 package com.lopessystem.pocimproveapi.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.lopessystem.pocimproveapi.model.enumerations.Gender;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,6 +27,7 @@ import java.time.Period;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "person")
 public class Person {
@@ -59,7 +61,7 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "initial_date")
+    @Column(name = "create_date")
     @CreationTimestamp
     private OffsetDateTime createDate;
 
