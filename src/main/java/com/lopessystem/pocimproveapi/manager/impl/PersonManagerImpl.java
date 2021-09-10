@@ -6,6 +6,7 @@ import com.lopessystem.pocimproveapi.exceptions.EntityNotFoundException;
 import com.lopessystem.pocimproveapi.manager.PersonManager;
 import com.lopessystem.pocimproveapi.model.Person;
 import com.lopessystem.pocimproveapi.repository.PersonRepository;
+import com.lopessystem.pocimproveapi.util.ObjectMerger;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -14,7 +15,9 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -87,6 +90,16 @@ public class PersonManagerImpl implements PersonManager {
         findById(personId);
 
         personRepository.deleteById(personId);
+    }
+
+    @Override
+    public Person partialUpdate(Long personId, Map<String, Object> fields, HttpServletRequest servletRequest) {
+
+        Person person = findById(personId);
+
+        ObjectMerger.mergeRequestBodyToGenericObject(fields, person, Person.class, servletRequest);
+
+        return saveOrUpdatePerson(person);
     }
 
     private Person saveOrUpdatePerson(Person person) {

@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -50,5 +52,10 @@ public class PersonResourceImpl implements PersonResource {
     @Override
     public void delete(Long personId) {
         personManager.delete(personId);
+    }
+
+    @Override
+    public ResponseEntity<Person> partialUpdate(Long personId, Map<String, Object> fields, HttpServletRequest servletRequest) {
+        return ResponseEntity.ok(personManager.partialUpdate(personId, fields, servletRequest));
     }
 }

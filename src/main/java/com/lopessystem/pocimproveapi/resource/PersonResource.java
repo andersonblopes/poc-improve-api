@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 public interface PersonResource extends Versionable {
 
@@ -47,5 +50,11 @@ public interface PersonResource extends Versionable {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void delete(
             @PathVariable(name = "personId") Long personId);
+
+    @PatchMapping("/people/{personId}")
+    ResponseEntity<Person> partialUpdate(
+            @PathVariable(name = "personId") Long personId,
+            @RequestBody Map<String, Object> fields,
+            HttpServletRequest servletRequest);
 
 }

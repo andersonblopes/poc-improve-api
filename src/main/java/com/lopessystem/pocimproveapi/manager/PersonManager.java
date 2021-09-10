@@ -5,7 +5,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 public interface PersonManager {
 
@@ -23,5 +25,8 @@ public interface PersonManager {
 
     @Transactional
     void delete(Long personId);
+
+    @Transactional
+    Person partialUpdate(Long personId, Map<String, Object> fields, HttpServletRequest servletRequest);
 
 }
