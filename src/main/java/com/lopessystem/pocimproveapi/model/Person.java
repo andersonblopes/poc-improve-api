@@ -25,6 +25,9 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.Period;
 
+/**
+ * The type Person.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -35,46 +38,84 @@ public class Person {
 
     //TODO Create properly dto to avoid use entity class
 
+    /**
+     * The Id.
+     */
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * The Name.
+     */
     @NotEmpty
     private String name;
 
+    /**
+     * The Birth date.
+     */
     @NotNull
     @PastOrPresent
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
+    /**
+     * The Active.
+     */
     private Boolean active;
 
+    /**
+     * The Social name.
+     */
     @Column(name = "social_name")
     private String socialName;
 
+    /**
+     * The Mother name.
+     */
     @Column(name = "mother_name")
     private String motherName;
 
+    /**
+     * The Father name.
+     */
     @Column(name = "father_name")
     private String fatherName;
 
+    /**
+     * The Gender.
+     */
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    /**
+     * The Create date.
+     */
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "create_date")
     @CreationTimestamp
     private OffsetDateTime createDate;
 
+    /**
+     * The Update date.
+     */
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "update_date")
     @UpdateTimestamp
     private OffsetDateTime updateDate;
 
+    /**
+     * The Age.
+     */
     @Transient
     private String age;
 
+    /**
+     * Gets age.
+     *
+     * @return the age
+     */
     public String getAge() {
 
         if (birthDate != null) {

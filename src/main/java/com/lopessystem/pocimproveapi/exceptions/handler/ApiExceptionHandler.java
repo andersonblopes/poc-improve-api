@@ -15,9 +15,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * The type Api exception handler.
+ */
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
+    /**
+     * Handle entity not found response entity.
+     *
+     * @param ex         the ex
+     * @param webRequest the web request
+     * @return the response entity
+     */
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleEntityNotFound(EntityNotFoundException ex, WebRequest webRequest) {
 
@@ -30,6 +40,13 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, exceptionMessage, new HttpHeaders(), status, webRequest);
     }
 
+    /**
+     * Handle entity being used exception response entity.
+     *
+     * @param ex         the ex
+     * @param webRequest the web request
+     * @return the response entity
+     */
     @ExceptionHandler(EntityBeingUsedException.class)
     public ResponseEntity<Object> handleEntityBeingUsedException(EntityBeingUsedException ex, WebRequest webRequest) {
 
@@ -42,6 +59,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, exceptionMessage, new HttpHeaders(), status, webRequest);
     }
 
+    /**
+     * Create exception message builder exception message.
+     *
+     * @param status        the status
+     * @param exceptionType the exception type
+     * @param detail        the detail
+     * @param webRequest    the web request
+     * @return the exception message
+     */
     private ExceptionMessage createExceptionMessageBuilder(HttpStatus status, ExceptionType exceptionType, String detail,
                                                            WebRequest webRequest) {
 

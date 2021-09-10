@@ -19,13 +19,25 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Person manager.
+ */
 @Slf4j
 @Service
 @AllArgsConstructor
 public class PersonManagerImpl implements PersonManager {
 
+    /**
+     * The Person repository.
+     */
     private final PersonRepository personRepository;
 
+    /**
+     * Find all page.
+     *
+     * @param pageable the pageable
+     * @return the page
+     */
     @Override
     public Page<Person> findAll(Pageable pageable) {
         log.debug("Processing findAll");
@@ -35,6 +47,11 @@ public class PersonManagerImpl implements PersonManager {
         return new PageImpl<>(personPage.getContent(), pageable, personPage.getTotalElements());
     }
 
+    /**
+     * Find all list.
+     *
+     * @return the list
+     */
     @Override
     public List<Person> findAll() {
 
@@ -43,6 +60,12 @@ public class PersonManagerImpl implements PersonManager {
         return personRepository.findAll();
     }
 
+    /**
+     * Find by id person.
+     *
+     * @param personId the person id
+     * @return the person
+     */
     @Override
     public Person findById(Long personId) {
 
@@ -54,6 +77,12 @@ public class PersonManagerImpl implements PersonManager {
         return person;
     }
 
+    /**
+     * Create person.
+     *
+     * @param person the person
+     * @return the person
+     */
     @Override
     public Person create(Person person) {
 
@@ -66,6 +95,13 @@ public class PersonManagerImpl implements PersonManager {
     }
 
 
+    /**
+     * Update person.
+     *
+     * @param personId the person id
+     * @param person   the person
+     * @return the person
+     */
     @Override
     public Person update(Long personId, Person person) {
 
@@ -81,6 +117,11 @@ public class PersonManagerImpl implements PersonManager {
         return saveOrUpdatePerson(person);
     }
 
+    /**
+     * Delete.
+     *
+     * @param personId the person id
+     */
     @Override
     public void delete(Long personId) {
 
@@ -92,6 +133,14 @@ public class PersonManagerImpl implements PersonManager {
         personRepository.deleteById(personId);
     }
 
+    /**
+     * Partial update person.
+     *
+     * @param personId       the person id
+     * @param fields         the fields
+     * @param servletRequest the servlet request
+     * @return the person
+     */
     @Override
     public Person partialUpdate(Long personId, Map<String, Object> fields, HttpServletRequest servletRequest) {
 
@@ -102,6 +151,12 @@ public class PersonManagerImpl implements PersonManager {
         return saveOrUpdatePerson(person);
     }
 
+    /**
+     * Save or update person person.
+     *
+     * @param person the person
+     * @return the person
+     */
     private Person saveOrUpdatePerson(Person person) {
 
         log.debug("Processing saveOrUpdatePerson");

@@ -22,35 +22,82 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The interface Person resource.
+ */
 public interface PersonResource extends Versionable {
 
+    /**
+     * Find all response entity.
+     *
+     * @param pageable   the pageable
+     * @param parameters the parameters
+     * @return the response entity
+     */
     @GetMapping("/people")
     ResponseEntity<Page<Person>> findAll(
             @PageableDefault(sort = {"name"}) Pageable pageable,
             @RequestParam MultiValueMap<String, String> parameters);
 
+    /**
+     * Find all response entity.
+     *
+     * @return the response entity
+     */
     @GetMapping("/people/list")
     ResponseEntity<List<Person>> findAll();
 
+    /**
+     * Find by id response entity.
+     *
+     * @param personId the person id
+     * @return the response entity
+     */
     @GetMapping("/people/{personId}")
     ResponseEntity<Person> findById(@PathVariable(name = "personId") Long personId);
 
+    /**
+     * Create response entity.
+     *
+     * @param person the person
+     * @return the response entity
+     */
     @PostMapping("/admin/people")
     ResponseEntity<Person> create(
             @Valid
             @RequestBody Person person);
 
+    /**
+     * Update response entity.
+     *
+     * @param personId the person id
+     * @param person   the person
+     * @return the response entity
+     */
     @PutMapping("/people/{personId}")
     ResponseEntity<Person> update(
             @PathVariable(name = "personId") Long personId,
             @Valid
             @RequestBody Person person);
 
+    /**
+     * Delete.
+     *
+     * @param personId the person id
+     */
     @DeleteMapping("/people/{personId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void delete(
             @PathVariable(name = "personId") Long personId);
 
+    /**
+     * Partial update response entity.
+     *
+     * @param personId       the person id
+     * @param fields         the fields
+     * @param servletRequest the servlet request
+     * @return the response entity
+     */
     @PatchMapping("/people/{personId}")
     ResponseEntity<Person> partialUpdate(
             @PathVariable(name = "personId") Long personId,

@@ -11,16 +11,31 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The type Local date converter.
+ */
 @Component
 public class LocalDateConverter implements Converter<String, LocalDate> {
 
+    /**
+     * The constant SUPPORTED_FORMATS.
+     */
     private static final List<String> SUPPORTED_FORMATS = Arrays.asList("dd-MM-yyyy", "yyyy-MM-dd");
 
+    /**
+     * The constant DATE_TIME_FORMATTERS.
+     */
     private static final List<DateTimeFormatter> DATE_TIME_FORMATTERS = SUPPORTED_FORMATS
             .stream()
             .map(DateTimeFormatter::ofPattern)
             .collect(Collectors.toList());
 
+    /**
+     * Convert local date.
+     *
+     * @param s the s
+     * @return the local date
+     */
     @Override
     public LocalDate convert(String s) {
 

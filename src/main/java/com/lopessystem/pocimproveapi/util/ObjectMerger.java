@@ -11,12 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+/**
+ * The type Object merger.
+ */
 public class ObjectMerger {
 
+    /**
+     * Instantiates a new Object merger.
+     */
     private ObjectMerger() {
 
     }
 
+    /**
+     * Merge request body to generic object.
+     *
+     * @param objectMap      the object map
+     * @param objectToUpdate the object to update
+     * @param type           the type
+     * @param servletRequest the servlet request
+     */
     public static void mergeRequestBodyToGenericObject(Map<String, Object> objectMap, Object objectToUpdate, Class type, HttpServletRequest servletRequest) {
 
         ServletServerHttpRequest servletServerHttpRequest = new ServletServerHttpRequest(servletRequest);
