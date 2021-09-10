@@ -73,6 +73,7 @@ public class PersonManagerImpl implements PersonManager {
         Person personFound = findById(personId);
 
         person.setId(personFound.getId());
+        person.setCreateDate(personFound.getCreateDate());
 
         return saveOrUpdatePerson(person);
     }

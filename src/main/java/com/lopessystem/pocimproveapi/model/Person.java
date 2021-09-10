@@ -1,6 +1,7 @@
 package com.lopessystem.pocimproveapi.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lopessystem.pocimproveapi.model.enumerations.Gender;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -61,10 +62,12 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "create_date")
     @CreationTimestamp
     private OffsetDateTime createDate;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @Column(name = "update_date")
     @UpdateTimestamp
     private OffsetDateTime updateDate;
