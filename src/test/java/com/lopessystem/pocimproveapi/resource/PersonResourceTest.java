@@ -48,7 +48,7 @@ public class PersonResourceTest extends ResourceTestConfig {
 
         Mockito.when(personManager.findAll(Mockito.any())).thenReturn(personPage);
 
-        mockMvc.perform((get("/v1/people").contentType(MediaType.APPLICATION_JSON))).andDo(print())
+        mockMvc.perform((get("/v1/peoples").contentType(MediaType.APPLICATION_JSON))).andDo(print())
                 .andExpect(status().isOk()).andExpect(content().string(containsString("Mother Person Name")))
                 .andExpect(content().string(containsString("totalElements\":1")));
 
