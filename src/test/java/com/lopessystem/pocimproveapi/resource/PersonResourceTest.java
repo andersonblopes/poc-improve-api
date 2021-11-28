@@ -2,6 +2,8 @@ package com.lopessystem.pocimproveapi.resource;
 
 import com.lopessystem.pocimproveapi.config.ResourceTestConfig;
 import com.lopessystem.pocimproveapi.exceptions.EntityNotFoundException;
+import com.lopessystem.pocimproveapi.manager.PersonManager;
+import com.lopessystem.pocimproveapi.model.Person;
 import com.lopessystem.pocimproveapi.util.PersonResourceTestSupport;
 import com.lopessystem.pocimproveapi.util.SerializeJsonResourceTestSupport;
 import org.junit.jupiter.api.Test;
