@@ -138,4 +138,21 @@ public class Person {
 
         return age;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", birthDate=" + birthDate +
+                ", active=" + active +
+                ", socialName='" + socialName + '\'' +
+                ", motherName='" + motherName + '\'' +
+                ", fatherName='" + fatherName + '\'' +
+                ", gender=" + gender +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", age='" + age + '\'' +
+                '}';
+    }
 }
